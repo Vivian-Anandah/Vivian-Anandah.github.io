@@ -292,3 +292,120 @@ form textarea {
     width: 100%;
   }
 }
+/* PROJECTS SECTION */
+#projects {
+  max-width: 1200px;
+  margin: 60px auto;
+  padding: 0 20px;
+}
+
+.projects-title {
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: #ffffff;
+  text-align: center;
+}
+
+.projects-intro {
+  text-align: center;
+  color: #9aa7b2;
+  margin-bottom: 50px;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.projects-container {
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+}
+
+.project-card {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  background: #0b1220;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(100, 210, 255, 0.2);
+}
+
+.project-card.reverse {
+  flex-direction: row-reverse;
+}
+
+.project-text {
+  flex: 1;
+}
+
+.project-text h3 {
+  font-size: 24px;
+  margin: 15px 0;
+  color: #ffffff;
+}
+
+.project-text p {
+  color: #9aa7b2;
+  line-height: 1.6;
+}
+
+.project-image {
+  flex: 1;
+  overflow: hidden;
+  border-radius: 10px;
+}
+
+.project-image img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.btn.blue:hover{
+  transform: scale(1.05);
+  transition: transform 0.3s ease;
+}
+
+/* Tags for projects */
+.project-text .tag {
+  display: inline-block;
+  margin-bottom: 10px;
+  font-size: 12px;
+  padding: 5px 12px;
+  border-radius: 20px;
+  color: #fff;
+  font-weight: 500;
+}
+
+.project-text .tag.blue {
+  background: #1e90ff;
+  color: #fff;
+}
+
+/* Buttons for projects */
+.project-text .btn {
+  margin-top: 15px;
+  padding: 10px 15px;
+  border-radius: 6px;
+  font-weight: 600;
+  text-decoration: none;
+  display: inline-block;
+  transition: 0.3s;
+}
+
+
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .project-card,
+  .project-card.reverse {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .project-image {
+    margin-top: 20px;
+  }
+}
