@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>CTF PORTFOLIO</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+ <section id="header">
+    <div class="hero">
+        <ul class="socials">
+          <li>
+            <a href="https://www.linkedin.com/in/vivian-yvone-anandah" target="_blank">
+              <img src="img/LinkedIn.png" alt="LinkedIn"></a>
+          </li>
+          <li class="myhub">
+            <a href="https://github.com/Vivian-Anandah" target="_blank">
+              <img src="img/Vector.png" alt="Github"></a>  
+          </li>
+
+        </ul>
+    <div class="container1">
+      <nav>
+        <ul>
+          <li><a href="#header"> Home </a></li>
+          <li><a href="#about"> About </a></li>
+          <li><a href="#ctfchallenges"> CTFs </a></li>
+          <li><a href="#contact"> Contact </a></li>
+          
+
+        </ul>
+      </nav>
+    </div>
+      <!-- Terminal -->
+      <div class="terminal">
+        <p class="line"><span class="prompt">root@vivian:~$</span> <span class="typing" id="line1"></span></p>
+        <p class="line"><span class="prompt">root@vivian:~$</span> <span class="typing" id="line2"></span></p>
+        <p class="line"><span class="prompt">root@vivian:~$</span> <span class="typing" id="line3"></span> <span class="cursor">|</span></p>
+      </div>
+  </div>
+ </section>
+    </div>
+  </div>
+  <div id="about">
+    <div class="about-section">
+        <h3 class="about-title">About Me</h3>
+        <p class="about-text">
+            IT Support Specialist with experience in troubleshooting, network administration, and cybersecurity. 
+            Skilled in hardware/software maintenance, IT security standards, and technical documentation. 
+            Proven ability to resolve complex IT issues, optimize system performance, and deliver reliable user support. 
+            Currently expanding expertise through advanced cybersecurity training, Internet governance, and Python programming.
+        </p>
+    </div>
+  </div>
+
+
+<!-- CTF HEADER  -->
+<header id="ctfchallenges" class="site-header">
+  <div class="container">
+    <h1 class="site-title">CTFs</h1>
+    <p class="site-subtitle">A collection of capture-the-flag challenges I've solved</p>
+  </div>
+</header>
+
+<!--  CTF CARDS  -->
+<main class="container">
+  <section class="ctf-grid">
+
+    <!-- CARD 1 -->
+    <article class="ctf-card">
+      <header class="card-header">
+        <h2 class="ctf-title">Hacked</h2>
+        <span class="tag">Reverse Engineering</span>
+      </header>
+
+      <p class="ctf-meta">
+        Difficulty: <strong>Easy</strong> • Platform: <strong>TryHackMe</strong> • 
+        Date: <time datetime="2025-10-05">Oct 5, 2025</time>
+      </p>
+
+      <div class="ctf-body">
+        <p class="ctf-desc">
+          Solved by reading the binary with a disassembler and reconstructing input logic.
+        </p>
+
+        <ul class="ctf-steps">
+          <li>Static analysis (IDA/Ghidra)</li>
+          <li>Reversed XOR logic</li>
+          <li><code>CTF{r3v_1s_fun}</code></li>
+        </ul>
+
+        <a href="writeup.html" class="btn">Read write-up</a>
+      </div>
+    </article>
+
+    <!-- CARD 2 -->
+    <article class="ctf-card">
+      <header class="card-header">
+        <h2 class="ctf-title">SQLi-Playground</h2>
+        <span class="tag">Web, SQLi</span>
+      </header>
+
+      <p class="ctf-meta">
+        Difficulty: <strong>Medium</strong> • Platform: <strong>TryHackMe</strong> • 
+        Date: <time datetime="2025-08-12">Aug 12, 2025</time>
+      </p>
+
+      <div class="ctf-body">
+        <p class="ctf-desc">
+          Exploited blind SQL injection and extracted admin credentials.
+        </p>
+
+        <ul class="ctf-steps">
+          <li>Found injection with Burp Suite</li>
+          <li>Used time-based payloads</li>
+          <li><code>CTF{sql_got_0wned}</code></li>
+        </ul>
+
+        <a href="#" class="btn">Read write-up</a>
+      </div>
+    </article>
+     <article class="ctf-card">
+      <header class="card-header">
+        <h2 class="ctf-title">Hacked</h2>
+        <span class="tag">Reverse Engineering</span>
+      </header>
+
+      <p class="ctf-meta">
+        Difficulty: <strong>Easy</strong> • Platform: <strong>TryHackMe</strong> • 
+        Date: <time datetime="2025-10-05">Oct 5, 2025</time>
+      </p>
+
+      <div class="ctf-body">
+        <p class="ctf-desc">
+          Solved by reading the binary with a disassembler and reconstructing input logic.
+        </p>
+
+        <ul class="ctf-steps">
+          <li>Static analysis (IDA/Ghidra)</li>
+          <li>Reversed XOR logic</li>
+          <li><code>CTF{r3v_1s_fun}</code></li>
+        </ul>
+
+        <a href="#" class="btn">Read write-up</a>
+      </div>
+    </article>
+
+
+  </section>
+</main>
+
+<!-- CONTACT  -->
+<section id="contact">
+  <div class="container">
+    <h1 class="sub-title">Get in Touch</h1>
+
+    <div class="contact-right">
+      <form>
+        <input type="text" name="Name" placeholder="Your Name" required>
+        <input type="email" name="email" placeholder="Your Email" required>
+        <textarea name="message" rows="6" placeholder="Your Message"></textarea>
+        <button type="submit" class="btn2">Submit </button>
+      </form>
+    </div>
+  </div>
+</section>
+<script>
+const lines = [
+  "whoami",
+  "Vivian - IT Specialist & Cybersecurity Enthusiast",
+  "loading skills... ██████████ 100%"
+];
+
+let i = 0;
+let j = 0;
+let currentLine = 0;
+
+function type() {
+  if (currentLine < lines.length) {
+    if (j < lines[currentLine].length) {
+      document.getElementById("line" + (currentLine + 1)).textContent += lines[currentLine][j];
+      j++;
+      setTimeout(type, 50);
+    } else {
+      j = 0;
+      currentLine++;
+      setTimeout(type, 500);
+    }
+  }
+}
+
+type();
+</script>
+
+</body>
+</html>
