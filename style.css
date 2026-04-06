@@ -11,13 +11,14 @@ body {
   font-family: Inter, system-ui;
 }
 
-/* NAVBAR */
+/* NAVBAR  */
 .container1 {
   position: absolute;
   top: 20px;
   right: 10%;
   padding: 10px;
 }
+
 .socials {
   position: absolute;
   top: 23px;
@@ -25,24 +26,11 @@ body {
   padding: 10px;
   gap: 20px;
 }
-.myhub{
-  box-shadow: 0 0 20px rgba(234, 238, 239, 0.2);
-  background: white;
-  border-radius: 100%;
-  object-fit: cover;
-  width: 20px;
-  height: 20px;
-}
-.myhub img {
-  width: 20px;
-  height: 20px; 
-}
+
 ul {
   display: flex;
   gap: 20px;
   list-style: none;
-  padding: 0;
-  margin: 0;
 }
 
 nav ul li a {
@@ -51,15 +39,70 @@ nav ul li a {
   font-size: 18px;
 }
 
+/*  PROFILE IMAGE */
+.myhub {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: white;
+  object-fit: cover;
+  box-shadow: 0 0 20px rgba(234, 238, 239, 0.2);
+}
+
+.myhub img {
+  width: 100%;
+  height: 100%;
+}
+
+/*  HERO */
 .hero {
   height: 100vh;
   background: url('./img/wallpaper.png') top center / cover no-repeat;
-  position: relative; /* important for navbar positioning */
+  position: relative;
   display: flex;
   align-items: center;
-  justify-content: center;  /*centers the terminal*/
-  flex-direction: column; /* optional,for vertical layout */
-} 
+  justify-content: center;
+  flex-direction: column;
+}
+
+/* TERMINAL  */
+.terminal {
+  max-width: 530px;
+  width: 100%;
+  padding: 20px;
+  background: #000;
+  border-radius: 10px;
+  text-align: left;
+  font-family: monospace;
+  box-shadow: 0 0 20px rgba(100,210,255,0.2);
+}
+
+.line {
+  margin: 8px 0;
+  color: #00ff9c;
+}
+
+.prompt {
+  color: #64d2ff;
+  margin-right: 5px;
+}
+
+.cursor {
+  display: inline-block;
+  margin-left: 5px;
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+/*  ABOUT  */
+#about {
+  max-width: 1100px;
+  margin: auto;
+  padding: 20px;
+}
 
 .about-section {
   max-width: 800px;
@@ -70,7 +113,7 @@ nav ul li a {
 
 .about-title {
   font-size: 28px;
-  font-weight: 700; /* makes it bold */
+  font-weight: 700;
   margin-bottom: 15px;
   color: #ffffff;
 }
@@ -81,18 +124,12 @@ nav ul li a {
   color: #9aa7b2;
 }
 
-/* About Section */
-#about {
-  max-width: 1100px;
-  margin: auto;
-  padding: 20px;
-}
 .header-2 {
   margin-top: 20px;
   color: #9aa7b2;
 }
 
-/* CTF  */
+/*  CTF  */
 .site-header {
   padding: 30px 0;
 }
@@ -133,55 +170,45 @@ nav ul li a {
   border-radius: 6px;
 }
 
-/* CONTACT  */
+/*  CONTACT */
 #contact {
   padding: 100px 0;
-}
-.contact-right input,
-.contact-right textarea {
-  padding: 12px;
-  border-radius: 5px;
-  border: 1px solid #333;
-  background: #222;
-  color: #fff;
-  font-size: 16px;
-  width: 100%;
-  box-sizing: border-box;
-}
-
-form input,
-form textarea {
-  width: 100%;
-  margin: 10px 0;
-  padding: 12px;
-  background: #262626;
-  border: none;
-  color: white;
-  display: inline-block;
 }
 
 .container {
   display: flex;
-  justify-content: center;  /* horizontal center */
-  align-items: center;      /* vertical center */
-  /*height: 50vh;            full viewport height */
-  flex-direction: column;   /* stack items vertically */
-  padding: 20px;
-  box-sizing: border-box;
-}
-.contact-right form {
-  display: flex;
   flex-direction: column;
-  gap: 15px; /* space between fields */
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.contact-right form {
+  max-width: 400px;
   width: 100%;
-  max-width: 400px;  /*limit form width */
-  background: #111; /* dark form background */
   padding: 30px;
+  background: #111;
   border-radius: 10px;
   box-shadow: 0 0 20px rgba(100,210,255,0.2);
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* merged duplicate input styles */
+form input,
+form textarea {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  background: #262626;
+  border: 1px solid #333;
+  border-radius: 5px;
+  color: white;
 }
 
 .btn2 {
+  width: 50%;
   padding: 12px;
   border: none;
   border-radius: 5px;
@@ -190,37 +217,78 @@ form textarea {
   font-weight: bold;
   cursor: pointer;
   transition: 0.3s;
-  width: 50%;
 }
 
-/* TERMINAL */
- .terminal {
-  background: #000;
-  border-radius: 10px;
-  padding: 20px;
-  width: 100%;
-  max-width: 530px;
-  text-align: left;
-  font-family: monospace;
-  box-shadow: 0 0 20px rgba(100,210,255,0.2);
-}
+/*  MOBILE  */
+@media (max-width: 768px) {
 
-.line {
-  margin: 8px 0;
-  color: #00ff9c;
-}
+  .container1 {
+    top: 10px;
+    right: 20%;
+  }
 
-.prompt {
-  color: #64d2ff;
-  margin-right: 5px;
-}
+  .socials {
+    top: 20px;
+    right: 5%;
+  }
 
-.cursor {
-  display: inline-block;
-  margin-left: 5px;
-  animation: blink 1s infinite;
-}
+  ul {
+    gap: 10px;
+    background: rgba(0,0,0,0.8);
+    padding: 10px;
+    border-radius: 10px;
+  }
 
-@keyframes blink {
-  50% { opacity: 0; }
+  nav ul li a {
+    font-size: 16px;
+  }
+
+  .hero {
+    padding: 20px;
+    text-align: center;
+  }
+
+  .terminal {
+    padding: 15px;
+    font-size: 14px;
+  }
+
+  .myhub {
+    width: 20px;
+    height: 20px;
+  }
+
+  .myhub img {
+    width: 100%;
+    height: 100%;
+  }
+
+  .about-section {
+    margin: 30px auto;
+    text-align: center;
+  }
+
+  .about-title {
+    font-size: 22px;
+  }
+
+  .about-text {
+    font-size: 14px;
+  }
+
+  .ctf-grid {
+    grid-template-columns: 1fr;
+  }
+
+  #contact {
+    padding: 50px 0;
+  }
+
+  .contact-right form {
+    padding: 20px;
+  }
+
+  .btn2 {
+    width: 100%;
+  }
 }
