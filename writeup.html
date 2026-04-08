@@ -1,21 +1,241 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
 <head>
-  <title>H4cked - CTF Write-up</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>CTF Writeup | Vivian</title>
+  <style>
+    body {
+      background: #0b1120;
+      color: #e6eef6;
+      font-family: Inter, system-ui;
+      line-height: 1.6;
+    }
+    .writeup-header {
+      text-align: center;
+      padding: 40px 20px;
+      border-bottom: 1px solid #1f2a44;
+    }
+    .writeup-header h1 {
+      font-size: 2rem;
+      color: #60a5fa;
+    }
+    .writeup-header p {
+      color: #94a3b8;
+      margin-top: 10px;
+    }
+    .back-btn {
+      display: inline-block;
+      margin-top: 15px;
+      color: #60a5fa;
+      text-decoration: none;
+    }
+    .writeup-container {
+      max-width: 900px;
+      margin: auto;
+      padding: 30px;
+    }
+    .writeup-section {
+      margin-bottom: 40px;
+    }
+    .writeup-section h2 {
+      color: #38bdf8;
+      margin-bottom: 10px;
+    }
+    pre {
+      background: #020617;
+      padding: 15px;
+      border-radius: 8px;
+      overflow-x: auto;
+      color: #22c55e;
+    }
+    code {
+      color: #22c55e;
+      font-weight: bold;
+    }
+    .flag {
+      display: block;
+      background: #020617;
+      padding: 12px;
+      margin-top: 10px;
+      border-left: 4px solid #22c55e;
+      color: #22c55e;
+      font-weight: bold;
+    }
+    img {
+      width: 100%;
+      margin-top: 15px;
+      border-radius: 10px;
+      border: 1px solid #1f2a44;
+    }
+    .fix-box {
+      background: #020617;
+      padding: 20px;
+      border-radius: 10px;
+      border-left: 4px solid #f59e0b;
+    }
+  </style>
 </head>
+
 <body>
 
-  <h1>Hacked (TryHackMe)</h1>
-  <p><strong>Category:</strong> Reverse Engineering</p>
+  <header class="writeup-header">
+    <h1>DevPortal Ownership Override</h1>
+    <p>Broken Access Control | CTF Write-up</p>
+    <a href="index.html" class="back-btn">← Back to Portfolio</a>
+  </header>
 
-  <h2>Step 1: Static Analysis</h2>
-  <p>Note this is a dummy and my write ups will be uploaded soon</p>
+  <main class="writeup-container">
 
-  <h2>Step 2: XOR Logic</h2>
-  <p>Note this is a dummy and my write ups will be uploaded soon</p>
+    <!-- Objective -->
+    <section class="writeup-section">
+      <h2>Objective</h2>
+      <p>
+        My mission (which I happily accepted) was to figure out whether I could take control 
+        of another user’s account just by playing around with URLs and form data. 
+        Basically… can I become admin without actually being admin?
+      </p>
+    </section>
 
-  <h2>Flag</h2>
-  <code>CTF{r3v_1s_fun}</code>
+    <!-- Tools -->
+    <section class="writeup-section">
+      <h2>Tools Used</h2>
+      <ul>
+        <li>Chrome (my loyal sidekick)</li>
+        <li>Curiosity and a bit of suspicion</li>
+        <li>Manual testing (because sometimes simple is powerful)</li>
+      </ul>
+    </section>
+
+    <!-- Step 1 -->
+    <section class="writeup-section">
+      <h2>Step 1: Getting In</h2>
+      <p>
+        First things first — I created a normal user account and logged in. 
+        Nothing fancy here… yet.
+      </p>
+      <p>
+        Everything looked perfectly normal — which in CTFs usually means 
+        something is definitely not normal.
+      </p>
+      <img src="img/Image1.png" alt="Step 1 Screenshot">
+    </section>
+
+    <!-- Step 2 -->
+    <section class="writeup-section">
+      <h2>Step 2: The “Hmm…” Moment</h2>
+      <p>
+        After logging in, I checked my profile URL and noticed something interesting:
+      </p>
+      <pre>
+http://target/profile?id=4
+      </pre>
+      <p>
+        Anytime I see an <code>id</code> in a URL, my brain immediately goes:
+        "What happens if I change that?"
+      </p>
+      <p>
+        So I did what any curious person would do — I changed it.
+      </p>
+      <pre>
+?id=4 → ?id=1
+      </pre>
+      <p>
+        And just like that… I was inside another user’s profile.
+      </p>
+      <p>
+        No warning. No permission check. No “hey, that’s illegal” popup.
+      </p>
+      <img src="img/Image2.png" alt="Step 2 Screenshot">
+    </section>
+
+    <!-- Step 3 -->
+    <section class="writeup-section">
+      <h2>Step 3: Accidental Promotion to Admin</h2>
+      <p>
+        Then I tried <code>?id=1</code>… and it worked.
+      </p>
+      <p>
+        I landed on the admin account.
+      </p>
+      <p>
+        At this point I wasn’t even hacking anymore — the application was basically 
+        giving me a guided tour of its vulnerabilities.
+      </p>
+      <img src="img/Image3.png" alt="Admin Access">
+    </section>
+
+    <!-- Step 4 -->
+    <section class="writeup-section">
+      <h2>Step 4: Finding the Flag</h2>
+      <p>
+        With admin access secured (way too easily), I checked the page source — 
+        because flags love hiding there.
+      </p>
+      <p>
+        And sure enough, I found:
+      </p>
+      <code class="flag">h4kit{email_override_success_7a9063567722}</code>
+      <img src="img/Image4.png" alt="Settings Exploit">
+      <p>
+        Not going to lie… that felt a little too easy.
+      </p>
+    </section>
+
+    <!-- Step 5 -->
+    <section class="writeup-section">
+      <h2>Step 5: What Else Can I Break?</h2>
+      <p>
+        Naturally, I got curious again.
+      </p>
+      <p>
+        I navigated to the settings page:
+      </p>
+      <pre>
+http://target/settings?id=4
+      </pre>
+      <p>
+        Then changed it to:
+      </p>
+      <pre>
+?id=1
+      </pre>
+      <p>
+        And just like that… I could edit another user’s account.
+      </p>
+      <p>
+        I even changed the admin’s email and the system accepted it without question, as you can see below it accepts updates.
+      </p>
+      <p>
+        At this point, the app basically trusted me more than it trusted itself.
+      </p>
+      <img src="img/Image5.png" alt="Settings Exploit">
+    </section>
+
+    <!-- Conclusion -->
+    <section class="writeup-section">
+      <h2>Conclusion</h2>
+      <p>
+        This was a classic case of <strong>Broken Access Control</strong>.
+      </p>
+      <p>
+        The application never checked whether I was actually allowed to view or modify 
+        other users’ data it just assumed I should.
+      </p>
+      <p>
+        Which is great for me… but terrible for security.
+      </p>
+      <div class="fix-box">
+        <h3>Recommended Fix</h3>
+        <ul>
+          <li>Always verify user authorization on the backend</li>
+          <li>Never trust user-controlled input like URL parameters</li>
+          <li>Implement proper access control checks for every request</li>
+        </ul>
+      </div>
+    </section>
+
+  </main>
 
 </body>
 </html>
