@@ -48,11 +48,11 @@
   <section id="about">
     <div class="about-section">
       <h3 class="about-title">About Me</h3>
-      <p class="about-text">
-        I am an IT Specialist and Cybersecurity Enthusiast with hands-on experience in troubleshooting, network administration, and systems optimization. I enjoy solving complex technical challenges, including capture-the-flag (CTF) competitions focused on web and mobile security. 
-        Currently, I am expanding my skills in cybersecurity, automation, and Python programming, with a strong interest in security operations and ethical hacking. 
-        I am fluent in English, German, and Swahili, enabling me to work effectively in diverse environments.
-      </p>
+    <p class="about-text">
+      I am an IT Specialist and Cybersecurity Enthusiast with hands-on experience in troubleshooting, network administration, and systems optimization. I enjoy solving complex technical challenges, including capture-the-flag (CTF) competitions focused on web and mobile security. 
+      Currently, I am expanding my skills in cybersecurity, automation, and Python programming, with a strong interest in security operations and ethical hacking. 
+      I am fluent in English, German, and Swahili, enabling me to work effectively in diverse environments.
+    </p>
     </div>
   </section>
 
@@ -72,6 +72,7 @@
           <h2 class="ctf-title">DevPortal Ownership Override</h2>
           <span class="tag">Broken Access Control</span>
         </header>
+        
         <p class="ctf-meta">
           Difficulty: <strong>Easy</strong> • Platform: <strong>H4cked</strong> • 
           Date: <time datetime="2025-10-05">Oct 5, 2025</time>
@@ -80,6 +81,7 @@
           <p class="ctf-desc">
             Exploited an IDOR vulnerability by modifying user ID parameters in URLs to gain unauthorized access to other accounts, including admin.
           </p>
+          
           <ul class="ctf-steps">
             <li>Identified <code>?id=</code> parameter in profile URL</li>
             <li>Accessed admin account via <code>?id=1</code></li>
@@ -87,6 +89,7 @@
           </ul>
         </div>
         <a href="writeup.html" class="btn">Read write-up</a>
+        </div>
       </article>
 
       <!-- CARD 2 -->
@@ -166,11 +169,73 @@
           <textarea name="message" rows="6" placeholder="Your Message"></textarea>
           <button type="submit" class="btn2">Submit</button>
         </form>
-        <p id="form-message">Message sent!</p>
+        <p id="form-message" style="display:none; color: #e7e5ee; margin-top:10px;">Message sent!</p>
       </div>
     </div>
   </section>
 
-  <script src="script.js"></script>
+  <script>
+  // Terminal typing effect
+   const lines = [
+    "whoami",
+    "Vivian - IT Specialist & Cybersecurity Enthusiast",
+    "loading skills... ██████████ 100%"
+  ];
+
+  let currentLine = 0;
+  let currentChar = 0;
+
+  function type() {
+    if (currentLine < lines.length) {
+      const lineEl = document.getElementById("line" + (currentLine + 1));
+
+      // Add character
+      if (currentChar < lines[currentLine].length) {
+        // Append character with cursor at the end
+        lineEl.innerHTML = lines[currentLine].substring(0, currentChar + 1) + '<span class="cursor">|</span>';
+        currentChar++;
+        setTimeout(type, 50);
+      } else {
+        // Remove cursor from current line
+        lineEl.innerHTML = lines[currentLine];
+
+        // Move to next line after a short delay
+        currentLine++;
+        currentChar = 0;
+        setTimeout(type, 500);
+      }
+    } else {
+      // Finished all lines, scroll to About
+      document.getElementById("about").scrollIntoView({ behavior: "smooth" });
+    }
+  }
+
+  type();
+    // Form submission
+    const form = document.getElementById("contact-form");
+    const msg = document.getElementById("form-message");
+
+    form.addEventListener("submit", function(e) {
+      e.preventDefault();
+      const formData = new FormData(form);
+
+      fetch(form.action, {
+        method: "POST",
+        body: formData,
+        headers: {'Accept': 'application/json'}
+      }).then(response => {
+        if (response.ok) {
+          msg.style.display = "block";
+          form.reset();
+          setTimeout(() => msg.style.display = "none", 1000);
+        } else {
+          response.json().then(data => {
+            if (data.errors) alert("Error: " + data.errors.map(err => err.message).join(", "));
+            else alert("Oops! There was a problem submitting your form.");
+          });
+        }
+      }).catch(() => alert("Oops! There was a problem submitting your form."));
+    });
+  </script>
 </body>
 </html>
