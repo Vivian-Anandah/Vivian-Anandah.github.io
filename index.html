@@ -8,7 +8,6 @@
 </head>
 
 <body>
-  <!-- HEADER / HERO -->
   <section id="header">
     <div class="hero">
       <ul class="socials">
@@ -24,7 +23,7 @@
         </li>
       </ul>
 
-      <div class="container1">
+      <div class="navbar">
         <nav>
           <ul>
             <li><a href="#about">About</a></li>
@@ -44,7 +43,7 @@
     </div>
   </section>
 
-  <!-- ABOUT -->
+  <!-- About -->
   <section id="about">
     <div class="about-section">
       <h3 class="about-title">About Me</h3>
@@ -56,17 +55,15 @@
     </div>
   </section>
 
-  <!-- CTF CHALLENGES -->
+  <!-- CTF  -->
   <header id="ctfchallenges" class="site-header">
-    <div class="container">
       <h1 class="site-title">CTFs</h1>
       <p class="site-subtitle">A collection of capture-the-flag challenges I've solved</p>
-    </div>
   </header>
 
-  <main class="container">
+  <main>
     <section class="ctf-grid">
-      <!-- CARD 1 -->
+      <!-- CTF 1 -->
       <article class="ctf-card">
         <header class="card-header">
           <h2 class="ctf-title">DevPortal Ownership Override</h2>
@@ -89,10 +86,9 @@
           </ul>
         </div>
         <a href="writeup.html" class="btn">Read write-up</a>
-        </div>
       </article>
 
-      <!-- CARD 2 -->
+      <!-- CTF 2 -->
       <article class="ctf-card">
         <header class="card-header">
           <h2 class="ctf-title">SQLi-Playground</h2>
@@ -116,7 +112,7 @@
       </article>
     </section>
 
-    <!-- PROJECTS -->
+    <!-- Projects -->
     <section id="projects">
       <div class="projects-container">
         <h2 class="projects-title">Projects</h2>
@@ -158,11 +154,10 @@
     </section>
   </main>
 
-  <!-- CONTACT -->
-  <section id="contact">
-    <div class="container">
+  <!-- Contact -->
+  <section>
+    <div class="contact">
       <h1 class="sub-title">Get in Touch</h1>
-      <div class="contact-right">
         <form id="contact-form" action="https://formspree.io/f/xlgozaan" method="POST">
           <input type="text" name="Name" placeholder="Your Name" required>
           <input type="email" name="email" placeholder="Your Email" required>
@@ -170,12 +165,10 @@
           <button type="submit" class="btn2">Submit</button>
         </form>
         <p id="form-message" style="display:none; color: #e7e5ee; margin-top:10px;">Message sent!</p>
-      </div>
     </div>
   </section>
 
   <script>
-  // Terminal typing effect
    const lines = [
     "whoami",
     "Vivian - IT Specialist & Cybersecurity Enthusiast",
@@ -189,29 +182,23 @@
     if (currentLine < lines.length) {
       const lineEl = document.getElementById("line" + (currentLine + 1));
 
-      // Add character
       if (currentChar < lines[currentLine].length) {
-        // Append character with cursor at the end
         lineEl.innerHTML = lines[currentLine].substring(0, currentChar + 1) + '<span class="cursor">|</span>';
         currentChar++;
         setTimeout(type, 50);
       } else {
-        // Remove cursor from current line
         lineEl.innerHTML = lines[currentLine];
 
-        // Move to next line after a short delay
         currentLine++;
         currentChar = 0;
         setTimeout(type, 500);
       }
     } else {
-      // Finished all lines, scroll to About
       document.getElementById("about").scrollIntoView({ behavior: "smooth" });
     }
   }
 
   type();
-    // Form submission
     const form = document.getElementById("contact-form");
     const msg = document.getElementById("form-message");
 
