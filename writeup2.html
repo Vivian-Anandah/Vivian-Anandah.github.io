@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>CTF Writeup | Vivian</title>
+
+  <style>
+    body {
+      background: #0b1120;
+      color: #e6eef6;
+      font-family: Inter, system-ui;
+      line-height: 1.6;
+    }
+
+    .writeup-header {
+      text-align: center;
+      padding: 40px 20px;
+      border-bottom: 1px solid #1f2a44;
+    }
+
+    .writeup-header h1 {
+      font-size: 2rem;
+      color: #60a5fa;
+    }
+
+    .writeup-header p {
+      color: #94a3b8;
+      margin-top: 10px;
+    }
+
+    .back-btn {
+      display: inline-block;
+      margin-top: 15px;
+      color: #60a5fa;
+      text-decoration: none;
+    }
+
+    .writeup-container {
+      max-width: 900px;
+      margin: auto;
+      padding: 30px;
+    }
+
+    .writeup-section {
+      margin-bottom: 40px;
+    }
+
+    .writeup-section h2 {
+      color: #38bdf8;
+      margin-bottom: 10px;
+    }
+
+    pre {
+      background: #020617;
+      padding: 15px;
+      border-radius: 8px;
+      overflow-x: auto;
+      color: #22c55e;
+    }
+
+    code {
+      color: #22c55e;
+      font-weight: bold;
+    }
+
+    .flag {
+      display: block;
+      background: #020617;
+      padding: 12px;
+      margin-top: 10px;
+      border-left: 4px solid #22c55e;
+      color: #22c55e;
+      font-weight: bold;
+    }
+
+    img {
+      width: 100%;
+      margin-top: 15px;
+      border-radius: 10px;
+      border: 1px solid #1f2a44;
+    }
+
+    .fix-box {
+      background: #020617;
+      padding: 20px;
+      border-radius: 10px;
+      border-left: 4px solid #f59e0b;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header class="writeup-header">
+    <h1>Root of All Trouble</h1>
+    <p>Exposed SSH & Default Credentials | CTF Write-up</p>
+    <a href="index.html" class="back-btn">← Back to Portfolio</a>
+  </header>
+
+  <main class="writeup-container">
+
+    <!-- Objective -->
+    <section class="writeup-section">
+      <h2>Objective</h2>
+      <p>
+        My goal was to assess whether a DevOps jump box was still exposed with SSH access 
+        and default root credentials. In other words, I wanted to see if I could gain 
+        privileged access simply by connecting to it.
+      </p>
+    </section>
+
+    <!-- Tools -->
+    <section class="writeup-section">
+      <h2>Tools Used</h2>
+      <ul>
+        <li>nmap</li>
+        <li>ssh</li>
+        <li>Linux shell commands</li>
+      </ul>
+    </section>
+
+    <!-- Step 1 -->
+    <section class="writeup-section">
+      <h2>Step 1: Port Discovery</h2>
+      <p>
+        I started by scanning the target to check if SSH was exposed, especially on 
+        non-standard ports.
+      </p>
+
+      <pre>
+nmap -p 34254 68.183.205.254
+      </pre>
+
+      <p>
+        The scan confirmed that port 34254 was open and running SSH.
+      </p>
+
+      <img src="img/Picture1.png" alt="Nmap Scan">
+    </section>
+
+    <!-- Step 2 -->
+    <section class="writeup-section">
+      <h2>Step 2: Root Login Attempt</h2>
+      <p>
+        With SSH confirmed, I attempted to connect directly as root.
+      </p>
+
+      <pre>
+ssh -p 34254 root@68.183.205.254
+      </pre>
+
+      <p>
+        I tried the default password <code>root</code>, and it worked.
+      </p>
+
+      <p>
+        At this point, I had full root access without any restrictions. 
+        No hardening, no authentication controls, nothing in place to stop it.
+      </p>
+
+      <img src="img/Picture2.png" alt="SSH Login">
+    </section>
+
+    <!-- Step 3 -->
+    <section class="writeup-section">
+      <h2>Step 3: Flag & Evidence Retrieval</h2>
+      <p>
+        Once inside, I checked the root directory for anything useful.
+      </p>
+
+      <pre>
+ls -la /root
+cat /root/flag.txt
+      </pre>
+
+      <p>
+        I found the flag file and displayed its contents:
+      </p>
+
+      <code class="flag">h4kit{root_login_still_alive_b5b9163a43cb}</code>
+
+      <img src="img/Picture3.png" alt="Flag">
+    </section>
+
+    <!-- Impact -->
+    <section class="writeup-section">
+      <h2>Impact</h2>
+      <p>
+        Gaining root access immediately exposes the entire system. 
+        From here, it would be possible to move laterally, access sensitive data, 
+        and compromise connected systems.
+      </p>
+
+      <p>
+        This demonstrates a serious failure in credential management and system hardening.
+      </p>
+    </section>
+
+    <!-- Fix -->
+    <section class="writeup-section">
+      <h2>Recommended Fix</h2>
+      <div class="fix-box">
+        <ul>
+          <li>Disable root SSH login (PermitRootLogin no)</li>
+          <li>Use SSH key-based authentication instead of passwords</li>
+          <li>Immediately change default credentials</li>
+          <li>Restrict SSH access to trusted IP ranges</li>
+          <li>Perform regular configuration audits</li>
+          <li>Monitor and alert on suspicious login activity</li>
+        </ul>
+      </div>
+    </section>
+
+  </main>
+
+</body>
+</html>
