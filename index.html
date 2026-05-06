@@ -65,31 +65,32 @@
     <section class="ctf-grid">
 
   <!-- CTF 1 -->
-  <article class="ctf-card">
-    <header class="card-header">
-      <h2 class="ctf-title">DevPortal Ownership Override</h2>
-      <span class="tag">Broken Access Control</span>
-    </header>
+   <article class="ctf-card">
+  <header class="card-header">
+    <h2 class="ctf-title">Metadata Capture via Social Engineering</h2>
+    <span class="tag">Recon, Social Engineering</span>
+  </header>
 
-    <p class="ctf-meta">
-      Difficulty: <strong>Easy</strong> • Platform: <strong>H4KIT</strong> • 
-      Date: <time datetime="2025-10-05">Oct 5, 2025</time>
+  <p class="ctf-meta">
+    Difficulty: <strong>Easy</strong> • Platform: <strong>Lab Simulation</strong> • 
+    Date: <time datetime="2026-04-15">April 15, 2026</time>
+  </p>
+
+  <div class="ctf-body">
+    <p class="ctf-desc">
+      Captured target metadata by deploying a phishing-style link using Seeker, exposing IP address, device details, and approximate location.
     </p>
 
-    <div class="ctf-body">
-      <p class="ctf-desc">
-        Exploited an IDOR vulnerability by modifying user ID parameters in URLs to gain unauthorized access to other accounts, including admin.
-      </p>
+    <ul class="ctf-steps">
+      <li>Deployed Seeker with Zoom template</li>
+      <li>Exposed local server using Serveo tunnel</li>
+      <li>Obfuscated link using Facad1ng</li>
+      <li>Captured IP, device, and location metadata</li>
+    </ul>
 
-      <ul class="ctf-steps">
-        <li>Identified <code>?id=</code> parameter in profile URL</li>
-        <li>Accessed admin account via <code>?id=1</code></li>
-        <li><code>h4kit{email_override_success_7a9063567722}</code></li>
-      </ul>
-
-      <a href="writeup.html" class="btn">Read write-up</a>
-    </div>
-  </article>
+    <a href="writeup3.html" class="btn">Read write-up</a>
+  </div>
+</article>
 
   <!-- CTF 2 -->
   <article class="ctf-card">
