@@ -6,25 +6,32 @@
   <title>CTF Writeup | Vivian</title>
 
   <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
     body {
       background: #0b1120;
       color: #e6eef6;
-      font-family: Inter, system-ui;
+      font-family: Inter, system-ui, sans-serif;
       line-height: 1.6;
     }
 
+    /* HEADER */
     .writeup-header {
       text-align: center;
       padding: 40px 20px;
       border-bottom: 1px solid #1f2a44;
     }
 
-    .writeup-header h1 {
+    .writeup-title {
       font-size: 2rem;
       color: #60a5fa;
     }
 
-    .writeup-header p {
+    .writeup-subtitle {
       color: #94a3b8;
       margin-top: 10px;
     }
@@ -36,173 +43,287 @@
       text-decoration: none;
     }
 
+    /* MAIN CONTAINER */
     .writeup-container {
       max-width: 900px;
       margin: auto;
       padding: 30px;
     }
 
+    /* SHARED SECTION STYLE */
     .writeup-section {
       margin-bottom: 40px;
     }
 
-    .writeup-section h2 {
+    .section-title {
       color: #38bdf8;
       margin-bottom: 10px;
     }
 
-    pre {
+    .section-text {
+      margin-bottom: 15px;
+    }
+
+    /* LISTS */
+    .tool-list,
+    .result-list,
+    .takeaway-list {
+      padding-left: 20px;
+      margin-top: 10px;
+    }
+
+    .tool-list li,
+    .result-list li,
+    .takeaway-list li {
+      margin-bottom: 8px;
+    }
+
+    /* CODE BLOCK */
+    .code-block {
       background: #020617;
       padding: 15px;
       border-radius: 8px;
       overflow-x: auto;
       color: #22c55e;
+      margin: 15px 0;
     }
 
-    img {
+    /* IMAGES */
+    .writeup-image {
       width: 100%;
       margin-top: 15px;
       border-radius: 10px;
       border: 1px solid #1f2a44;
     }
 
+    /* FIX BOX */
     .fix-box {
       background: #020617;
       padding: 20px;
       border-radius: 10px;
       border-left: 4px solid #f59e0b;
+      margin-top: 20px;
     }
   </style>
 </head>
 
 <body>
 
+  <!-- HEADER -->
   <header class="writeup-header">
-    <h1>Metadata Capture via Social Engineering</h1>
-    <p>Reconnaissance | CTF Write-up</p>
-    <a href="index.html" class="back-btn">← Back to Portfolio</a>
+    <h1 class="writeup-title">Metadata Capture via Social Engineering</h1>
+
+    <p class="writeup-subtitle">
+      Reconnaissance | CTF Write-up
+    </p>
+
+    <a href="index.html" class="back-btn">
+      ← Back to Portfolio
+    </a>
   </header>
 
+  <!-- MAIN CONTENT -->
   <main class="writeup-container">
 
-    <!-- Objective -->
-    <section class="writeup-section">
-      <h2>Objective</h2>
-      <p>
+    <!-- OBJECTIVE -->
+    <section class="writeup-section" id="objective">
+      <h2 class="section-title">Objective</h2>
+
+      <p class="section-text">
         In this challenge, my goal was to capture metadata from a target, including their IP address, 
         approximate location, and device information. This was achieved by setting up a listener and 
         delivering a crafted link to the target.
       </p>
-      <img src="img/recon1.png" alt="Overview">
     </section>
 
-    <!-- Tools -->
-    <section class="writeup-section">
-      <h2>Tools Used</h2>
-      <ul>
+    <!-- TOOLS -->
+    <section class="writeup-section" id="tools-used">
+      <h2 class="section-title">Tools Used</h2>
+
+      <ul class="tool-list">
         <li>Seeker</li>
         <li>Facad1ng</li>
         <li>Serveo</li>
         <li>Firefox browser</li>
       </ul>
-      <img src="img/recon2.png" alt="Tools setup">
     </section>
 
-    <!-- Step 1 -->
-    <section class="writeup-section">
-      <h2>Step 1: Setting Up the Listener</h2>
-      <p>
+    <!-- STEP 1 -->
+    <section class="writeup-section" id="step-1">
+      <h2 class="section-title">Step 1: Setting Up the Listener</h2>
+
+      <p class="section-text">
         I started by using Seeker to capture metadata when a user interacts with a link.
         After downloading it from GitHub, I launched the tool and selected a template.
       </p>
 
-      <p>
+      <p class="section-text">
         I chose a Zoom-themed template to make the link appear legitimate and increase interaction.
       </p>
 
-      <pre>
+      <div class="code-block">
 http://localhost:8080
-      </pre>
+      </div>
 
-      <p>
+      <p class="section-text">
         Accessing the local server confirmed the interface was working as expected.
       </p>
 
-      <img src="img/recon3.png" alt="Seeker running">
-      <img src="img/recon4.png" alt="Zoom interface preview">
+      <img src="img/recon1.png" alt="Overview" class="writeup-image">
+
+      <img src="img/recon2.png" alt="Tools setup" class="writeup-image">
+
+      <img src="img/recon3.png" alt="Seeker running" class="writeup-image">
     </section>
 
-    <!-- Step 2 -->
-    <section class="writeup-section">
-      <h2>Step 2: Exposing the Service</h2>
-      <p>
-        Since the service was only available locally, I exposed it to the internet using Serveo.
+    <!-- STEP 2 -->
+    <section class="writeup-section" id="step-2">
+      <h2 class="section-title">Step 2: Exposing the Service</h2>
+
+      <p class="section-text">
+       Since the service was only available on my machine, I needed to make it accessible externally.
+       For this demo, I used Serveo to create a temporary public endpoint.
       </p>
 
-      <pre>
+      <p class="section-text">
+       Normally, tools like Cloudflare Tunnel or ngrok are preferred because they are more stable
+       and provide better monitoring capabilities, but Serveo is quick and requires minimal setup.
+      </p>
+
+      <p class="section-text">
+       First, I prepared the lab environment.
+      </p>
+
+      <p class="section-text">
+       Next, I created a tunnel using:
+      </p>
+
+      <div class="code-block">
 ssh -R 80:localhost:8080 serveo.net
-      </pre>
+      </div>
 
-      <p>
-        This generated a public URL that forwarded requests to my local machine.
+      <p class="section-text">
+       This generated a public URL that forwarded requests directly to my local server.
       </p>
 
-      <img src="img/recon5.png" alt="Serveo tunnel">
+      <div class="code-block">
+https://10c7b342e1624a45-62-8-73-21.serveousercontent.com
+      </div>
+
+      <p class="section-text">
+        As shown above, the generated link is clearly suspicious and easy to identify,
+        which is where the next step becomes important.
+      </p>
+
+      <img src="img/recon4.png" alt="Serveo tunnel setup" class="writeup-image">
     </section>
 
-    <!-- Step 3 -->
-    <section class="writeup-section">
-      <h2>Step 3: Link Obfuscation</h2>
-      <p>
-        The generated link was clearly suspicious, so I used Facad1ng to mask it.
+    <!-- STEP 3 -->
+    <section class="writeup-section" id="step-3">
+      <h2 class="section-title">Step 3: Link Obfuscation</h2>
+
+      <p class="section-text">
+        Facad1ng is a social-engineering tool used for URL masking and redirection. 
+        It helps make suspicious-looking URLs appear more legitimate, such as the Serveo-generated link.
       </p>
 
-      <pre>
+      <p class="section-text">
+        On another terminal, I navigated into the Facad1ng directory using:
+      </p>
+
+      <div class="code-block">
+cd Facad1ng
+      </div>
+
+      <p class="section-text">
+        I then launched the tool with:
+      </p>
+
+      <div class="code-block">
+python3 facad1ng.py
+      </div>
+
+      <p class="section-text">
+        Once started, I was prompted to enter the original URL, where I supplied the link generated by Serveo.
+      </p>
+
+      <p class="section-text">
+        Next, I was asked to customize the domain name. I crafted it to resemble a legitimate Zoom invitation link.
+        Since I did not require phishing keywords for this demonstration, I skipped that option and continued.
+      </p>
+
+      <p class="section-text">
+        Facad1ng then generated two masked links. I selected the HTTPS version:
+      </p>
+
+      <div class="code-block">
 https://us01web1.zoom.us-@clck.ru/3TTSDQ
-      </pre>
+      </div>
 
-      <p>
-        This made the link appear more legitimate before sending it to the target.
+      <p class="section-text">
+        This made the link appear significantly more legitimate before sending it to the target.
       </p>
 
-      <img src="img/recon6.png" alt="Generated link">
-      <img src="img/recon7.png" alt="Facad1ng setup">
-      
+      <img src="img/recon5.png" alt="Serveo tunnel" class="writeup-image">
     </section>
 
-    <!-- Result -->
-    <section class="writeup-section">
-      <h2>Result</h2>
-      <p>
-        Once the target clicked the link and interacted with the page, Seeker captured metadata.
+    <!-- RESULTS -->
+    <section class="writeup-section" id="results">
+      <h2 class="section-title">Result</h2>
+
+      <p class="section-text">
+        With the masked link finally generated, I was able to deliver it to the target.
       </p>
 
-      <ul>
+      <p class="section-text">
+        Since this demonstration used the free version of Serveo, the target first encounters a warning page before proceeding, as shown below. 
+        Premium tunneling services generally provide a cleaner and more convincing experience without these warnings.
+      </p>
+
+      <p class="section-text">
+        After clicking continue, the target is redirected to the Zoom-themed interface prepared earlier.
+      </p>
+
+      <p class="section-text">
+        Once the target interacted with the page, Seeker successfully captured metadata from the session.
+      </p>
+
+      <ul class="result-list">
         <li>IP address</li>
         <li>Approximate location</li>
         <li>Device and browser details</li>
       </ul>
-      <p>
+
+      <p class="section-text">
         As observed in the Seeker terminal, the initial output reveals the target’s IP address, device details, and approximate location—even when location permissions are denied or disabled. The subsequent output provides more detailed information, including a generated link that simplifies verifying the target’s location.
       </p>
-      <p>
+
+      <p class="section-text">
         This demonstrates that meaningful metadata can still be collected despite restricted location permissions.
       </p>
-      <img src="img/recon8.png" alt="Masked link">
-      <img src="img/recon9.png" alt="Captured metadata">
+
+      <img src="img/recon6.png" alt="Generated link" class="writeup-image">
+
+      <img src="img/recon7.png" alt="Facad1ng setup" class="writeup-image">
+
+      <img src="img/recon8.png" alt="Masked link" class="writeup-image">
+
+      <img src="img/recon9.png" alt="Captured metadata" class="writeup-image">
     </section>
 
-    <!-- Conclusion -->
-    <section class="writeup-section">
-      <h2>Conclusion</h2>
-      <p>
+    <!-- CONCLUSION -->
+    <section class="writeup-section" id="conclusion">
+      <h2 class="section-title">Conclusion</h2>
+
+      <p class="section-text">
         This demonstrates how easily metadata can be exposed through simple user interaction.
         It highlights the importance of awareness when handling links and external content.
       </p>
 
       <div class="fix-box">
-        <h3>Defensive Takeaways</h3>
-        <ul>
+        <h3 class="section-title">Defensive Takeaways</h3>
+
+        <ul class="takeaway-list">
           <li>Avoid clicking unknown or unverified links</li>
           <li>Always verify sources</li>
           <li>Use VPNs or privacy tools</li>
